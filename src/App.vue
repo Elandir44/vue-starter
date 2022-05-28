@@ -9,8 +9,8 @@
 		
   </div>
   <div v-else>
-  <h2> Witaj {{ email }} </h2>
-  <a @click="logOut()">Wyloguj</a>
+  <logout-form :email="email"
+  @logout="logOut()"></logout-form>
   </div>
   
 
@@ -21,9 +21,10 @@
 <script>
 import "milligram";
 import LoginForm from "./LoginForm";
+import LogoutForm from "./LogoutForm";
 
 export default {
-components: {LoginForm},
+components: {LoginForm, LogoutForm},
 data() {
   return {
     email: '',
