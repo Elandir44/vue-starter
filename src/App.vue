@@ -2,11 +2,11 @@
   <div>
   <h1>Witaj w systemie do zapisów na zajęcia</h1>
   
-  <div v-if="!loggeIn">
-  <label>Zaloguj się e-mailem</label>
-   <input type="email" v-model="email"> 
-  <button @click="logMeIn()">Wyślij</button>
-  
+  <div v-if="!email">
+  	<login-form @login="logMeIn($event)" button-label="Wejdź"></login-form>
+    <login-form @login="logMeIn($event)" button-label="Wleć"></login-form>
+	<login-form @login="logMeIn($event)" :button-label="Math.random() < 0.5 ? 'Etykieta A' : 'Etykieta B'"></login-form>
+		
   </div>
   <div v-else>
   <h2> Witaj {{ email }} </h2>
@@ -20,19 +20,20 @@
 
 <script>
 import "milligram";
+import LoginForm from "./LoginForm";
 
 export default {
+components: {LoginForm},
 data() {
   return {
     email: '',
-	loggeIn: false,
   };
 
 },
 
 methods: {
-  logMeIn() {
-    this.loggeIn = true;
+  logMeIn(username) {
+    this.email = username;
   },
   logOut(){
   this.loggeIn = false;
@@ -41,14 +42,11 @@ methods: {
 },
 
 
+
   
 };
 </script>
 
 <style>
-#longg {
-color: red;
-}
-
 
 </style>
